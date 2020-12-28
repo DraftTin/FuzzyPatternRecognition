@@ -61,8 +61,8 @@ def getEquivalenceMatrix(R):
 
 def cutMatrix(R, thresh):
     """按照λ的值进行截割"""
-    R[R > thresh] = 1
-    R[R <= thresh] = 0
+    R[R >= thresh] = 1
+    R[R < thresh] = 0
     return R
 
 def getClusterRes(matrixCut, X):
@@ -114,6 +114,7 @@ def cluster(X):
 
 
 if __name__ == '__main__':
+    # 待聚类数据
     X = np.array([
         [1.4, 4, 0.58, 2, 1.67, 6.9],
         [1.38, 5, 0.61, 3, 1.42, 11.9],
@@ -126,6 +127,7 @@ if __name__ == '__main__':
     ])
     np.set_printoptions(precision=3)
     groupRes, plomerizationRes = cluster(X)
+    print(groupRes)
     X9 = [[0.95, 10, 0.57, 2, 1.1, 17.5]]
     X10 = [[2.75, 19.1, 0.31, 5, 31.6, 61.6]]
     newX = np.append(plomerizationRes, X9, axis=0)
